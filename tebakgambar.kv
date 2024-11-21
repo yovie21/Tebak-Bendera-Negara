@@ -1,0 +1,230 @@
+<StartScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: [20, 20]
+        spacing: 20
+        size_hint: None, None
+        width: 800
+        height: 600
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+        canvas.before:
+            Color:
+                rgba: 0.8, 0.4, 0.2, 1  # Bright background color
+            RoundedRectangle:
+                pos: self.pos
+                size: self.size
+                radius: [30]  # Rounded corners for a soft look
+
+            # Fun decorations like stars or clouds can be added here
+            Color:
+                rgba: 0.9, 0.9, 0.9, 1  # Light cloud color
+
+        Label:
+            text: "Tebak Bendera Negara!"
+            font_size: '40sp'
+            color: 1, 1, 0, 1  # Bright yellow text for visibility
+            bold: True
+            size_hint_y: None
+            height: '120dp'
+            pos_hint: {"center_x": 0.5}
+
+        Label:
+            text: "Pilih dan Tebak Benderanya!"
+            font_size: '24sp'
+            color: 0.2, 0.2, 0.5, 1
+            size_hint_y: None
+            height: '60dp'
+            pos_hint: {"center_x": 0.5}
+
+        Button:
+            text: "Play Now!"
+            font_size: '26sp'
+            size_hint_y: None
+            height: '70dp'
+            width: 250
+            pos_hint: {"center_x": 0.5}
+            background_color: 0.2, 0.6, 0.2, 1  # Green for 'start' button
+            color: 1, 1, 1, 1  # White text
+            bold: True
+            background_normal: ''  # Solid background, no image
+            background_down: 'assets/button_down.png'  # Optional image for click effect
+            on_release: root.start_game()
+
+        Widget:
+            size_hint_y: None
+            height: 100  # Spacer between the buttons
+
+
+<GameWidget>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: [20, 10]
+        spacing: 15
+        size_hint: None, None
+        width: 1920
+        height: 1080
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+        canvas.before:
+            Color:
+                rgba: 0.2, 0.2, 0.5, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Label:
+            text: "Tebak Bendera apakah ini?"
+            font_size: '25sp'
+            color: 1, 1, 1, 1
+            halign: 'center'
+            size_hint_y: None
+            height: '40dp'
+
+        Label:
+            id: score_label
+            text: "Your Score: 0"
+            font_size: '20sp'
+            color: 1, 0.5, 0, 1
+            size_hint_y: None
+            height: '40dp'
+
+        Label:
+            id: timer_label
+            text: "Time: 0s"
+            font_size: '20sp'
+            color: 1, 1, 1, 1
+            size_hint_y: None
+            height: '40dp'
+
+        Image:
+            id: flag_image
+            source: root.image_source
+            size_hint: None, None
+            width: 350
+            height: 250
+            pos_hint: {"center_x": 0.5}
+
+        Label:
+            id: answer_label
+            text: ""
+            font_size: '18sp'
+            color: 1, 1, 1, 1
+            halign: 'center'
+            size_hint_y: None
+            height: '40dp'
+
+        GridLayout:
+            cols: 2
+            spacing: 10
+            size_hint: None, None
+            width: 300
+            height: 150
+            pos_hint: {"center_x": 0.5}
+
+            Button:
+                id: choice1
+                text: ""
+                on_release: root.check_answer(self.text)
+
+            Button:
+                id: choice2
+                text: ""
+                on_release: root.check_answer(self.text)
+
+            Button:
+                id: choice3
+                text: ""
+                on_release: root.check_answer(self.text)
+
+            Button:
+                id: choice4
+                text: ""
+                on_release: root.check_answer(self.text)
+
+        Widget:
+            size_hint_y: None
+            height: 150
+
+        Button:
+            text: "Kembali"
+            size_hint: None, None
+            width: 300
+            height: '40dp'
+            pos_hint: {"center_x": 0.5}
+            background_color: 0.9, 0.2, 0.2, 1
+            on_release: app.stop()
+
+        Widget:
+            size_hint_y: None
+            height: 50
+
+<ResultScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: [40, 30]
+        spacing: 20
+        size_hint: None, None
+        width: 400
+        height: 300
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+        canvas.before:
+            Color:
+                rgba: 0.2, 0.5, 0.8, 1
+            RoundedRectangle:
+                pos: self.pos
+                size: self.size
+                radius: [20]
+
+        Label:
+            text: "Game Over!"
+            font_size: '28sp'
+            color: 1, 1, 1, 1
+            bold: True
+            size_hint_y: None
+            height: '60dp'
+            pos_hint: {"center_x": 0.5}
+
+        Label:
+            id: final_score_label
+            text: "Your Final Score: 0"
+            font_size: '24sp'
+            color: 0.9, 0.9, 0, 1  # Yellow color for emphasis
+            size_hint_y: None
+            height: '40dp'
+            pos_hint: {"center_x": 0.5}
+
+        Label:
+            id: time_label
+            text: "Time Taken: 0 seconds"
+            font_size: '20sp'
+            color: 0.8, 1, 0.8, 1  # Light green for time display
+            size_hint_y: None
+            height: '40dp'
+            pos_hint: {"center_x": 0.5}
+
+        Button:
+            text: "Play Again"
+            font_size: '18sp'
+            size_hint_y: None
+            height: '50dp'
+            width: 200
+            pos_hint: {"center_x": 0.5}
+            background_color: 0.3, 0.7, 0.3, 1  # Green background for positive action
+            on_release:
+                app.root.current = 'game'
+                app.root.get_screen('game').score = 0
+                app.root.get_screen('game').question_count = 0
+                app.root.get_screen('game').load_question()
+                app.root.get_screen('game').start_timer()
+
+        Button:
+            text: "Exit"
+            font_size: '18sp'
+            size_hint_y: None
+            height: '50dp'
+            width: 200
+            pos_hint: {"center_x": 0.5}
+            background_color: 0.8, 0.2, 0.2, 1  # Red color for exit
+            on_release: app.stop()
